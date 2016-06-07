@@ -12,7 +12,10 @@ import com.google.common.base.Strings;
 public enum EAlphabet {
 
 	LATIN("Latin"),
-	CYRILLIC("Cyrillic");
+	CYRILLIC("Cyrillic"),
+	RUSSIAN("Russian"),
+	CZECH("Czech"),
+	GREEK("Greek");
 	
 	private String alphabetName;
 	
