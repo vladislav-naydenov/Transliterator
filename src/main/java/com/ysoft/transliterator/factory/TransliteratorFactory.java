@@ -39,7 +39,7 @@ public class TransliteratorFactory {
 		ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(false);
 		scanner.addIncludeFilter(new AnnotationTypeFilter(AlphabetMapping.class));
 		
-		for (BeanDefinition beanDefinition : scanner.findCandidateComponents("com.ysoft.transliterator.alphabet.mapper.implementation")) {
+		for (BeanDefinition beanDefinition : scanner.findCandidateComponents("com.ysoft.transliterator.implementation")) {
 			Class<ITransliterator> mapperClass = (Class<ITransliterator>) Class.forName(beanDefinition.getBeanClassName());
 			AlphabetMapping alphabetMapping = mapperClass.getAnnotation(AlphabetMapping.class);
 			
