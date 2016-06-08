@@ -31,7 +31,13 @@ public class TransliteratorFactory {
 	}
 	
 	public static ITransliterator produce(EAlphabet fromAlphabet, EAlphabet toAlphabet) throws InstantiationException, IllegalAccessException {
-		return ALPHABET_TRANSLITERATORS.get(new TransliteratorKey(fromAlphabet, toAlphabet)).newInstance();
+		Class<ITransliterator> transliteratorClass = ALPHABET_TRANSLITERATORS.get(new TransliteratorKey(fromAlphabet, toAlphabet));
+		
+		if (transliteratorClass == null) {
+			throw new IllegalArgumentException(String.format("There is no ITransliterator implementation for source alphabet %s and target alphabet %s", fromAlphabet.getAlphabetName(), toAlphabet.getAlphabetName()));
+		}
+		
+		return transliteratorClass.newInstance();
 	}
 	
 	@SuppressWarnings("unchecked")
