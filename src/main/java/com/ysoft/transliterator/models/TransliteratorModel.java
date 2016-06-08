@@ -6,18 +6,20 @@ import java.util.stream.Collectors;
 import com.google.common.collect.Lists;
 import com.ysoft.transliterator.enumeration.EAlphabet;
 
-public class AlphabetsModel {
+public class TransliteratorModel {
 
 	private String primaryAlphabet;
 	private List<String> targetAlphabets;
 	private String sourceAlphabet;
 	private String targetAlphabet;
+	private String input;
+	private String result;
 	
-	public AlphabetsModel() {
+	public TransliteratorModel() {
 		this("Latin", getTargetAlphabetNames());
 	}
 	
-	public AlphabetsModel(String primaryAlphabet, List<String> targetAlphabets) {
+	public TransliteratorModel(String primaryAlphabet, List<String> targetAlphabets) {
 		this.primaryAlphabet = primaryAlphabet;
 		this.targetAlphabets = targetAlphabets;
 	}
@@ -44,6 +46,22 @@ public class AlphabetsModel {
 
 	public void setTargetAlphabet(String targetAlphabet) {
 		this.targetAlphabet = targetAlphabet;
+	}
+
+	public String getInput() {
+		return input;
+	}
+
+	public void setInput(String input) {
+		this.input = input;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 	private static List<String> getTargetAlphabetNames() {
