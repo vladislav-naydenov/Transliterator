@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ysoft.transliterator.contract.ITransliterator;
 import com.ysoft.transliterator.enumeration.EAlphabet;
+import com.ysoft.transliterator.exception.NonExistentTransliteratorException;
 import com.ysoft.transliterator.factory.TransliteratorFactory;
 import com.ysoft.transliterator.models.TransliteratorModel;
 
@@ -43,13 +44,17 @@ public class TransliteratorController {
 		model.addAttribute("transliteratorModel", transliteratorModel);
 		model.addAttribute("targetAlphabets", transliteratorModel.getTargetAlphabets());
 		model.addAttribute("input", transliteratorModel.getInput());
-		transliteratorModel.setResult(doTransliterate(transliteratorModel));
+		try {
+			transliteratorModel.setResult(doTransliterate(transliteratorModel));
+		} catch (NonExistentTransliteratorException e) {
+			model.addAttribute("error", String.format("Transliteration from %s to %s is not yet implemented.", transliteratorModel.getPrimaryAlphabet(), transliteratorModel.getTargetAlphabet()));
+		}
 		model.addAttribute("result", transliteratorModel.getResult());
 		
 		return "home";
 	}
 	
-	private String doTransliterate(TransliteratorModel transliteratorModel) {
+	private String doTransliterate(TransliteratorModel transliteratorModel) throws NonExistentTransliteratorException {
 		ITransliterator transliterator = null;
 		try {
 			transliterator = TransliteratorFactory.produce(EAlphabet.of(transliteratorModel.getPrimaryAlphabet()), EAlphabet.of(transliteratorModel.getTargetAlphabet()));

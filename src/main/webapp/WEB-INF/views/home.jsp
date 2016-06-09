@@ -8,6 +8,10 @@
 <body>
 <h1>Choose alphabet</h1>
 
+	<c:if test="${not empty error}">
+		<p>${error}</p>
+	</c:if>
+
 	<form:form method="POST" commandName="transliteratorModel" action="/transliterator/">
 		<table>
 			<tr>

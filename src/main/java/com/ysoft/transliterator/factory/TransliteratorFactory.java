@@ -13,6 +13,7 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 import com.ysoft.transliterator.annotation.AlphabetMapping;
 import com.ysoft.transliterator.contract.ITransliterator;
 import com.ysoft.transliterator.enumeration.EAlphabet;
+import com.ysoft.transliterator.exception.NonExistentTransliteratorException;
 
 /**
  * @author Vladislav Naydenov
@@ -30,11 +31,11 @@ public class TransliteratorFactory {
 		}
 	}
 	
-	public static ITransliterator produce(EAlphabet fromAlphabet, EAlphabet toAlphabet) throws InstantiationException, IllegalAccessException {
+	public static ITransliterator produce(EAlphabet fromAlphabet, EAlphabet toAlphabet) throws InstantiationException, IllegalAccessException, NonExistentTransliteratorException {
 		Class<ITransliterator> transliteratorClass = ALPHABET_TRANSLITERATORS.get(new TransliteratorKey(fromAlphabet, toAlphabet));
 		
 		if (transliteratorClass == null) {
-			throw new IllegalArgumentException(String.format("There is no ITransliterator implementation for source alphabet %s and target alphabet %s", fromAlphabet.getAlphabetName(), toAlphabet.getAlphabetName()));
+			throw new NonExistentTransliteratorException(String.format("There is no ITransliterator implementation for source alphabet %s and target alphabet %s", fromAlphabet.getAlphabetName(), toAlphabet.getAlphabetName()));
 		}
 		
 		return transliteratorClass.newInstance();
