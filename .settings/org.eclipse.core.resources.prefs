@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/ysoft/transliterator/implementation/LatinToCzechTransliterator.java=UTF-8
+encoding//src/main/java/com/ysoft/transliterator/implementation/LatinToGreekTransliterator.java=UTF-8
