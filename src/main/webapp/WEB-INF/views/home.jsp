@@ -39,10 +39,10 @@
 			
 			<fieldset class="form-group">
 				<form:label path="sourceAlphabetString">Source</form:label>
-				<form:textarea path="sourceAlphabetString" cssClass="form-control" cols="60" rows="20"/>
+				<form:textarea path="sourceAlphabetString" cssClass="form-control" cols="40" rows="10"/>
 				
 				<form:label path="targetAlphabetString">Target</form:label>
-				<form:textarea path="targetAlphabetString" cssClass="form-control" cols="60" rows="20"/>
+				<form:textarea path="targetAlphabetString" cssClass="form-control" cols="40" rows="10"/>
 			</fieldset>
 			
 			<div class="btn-group" role="group">

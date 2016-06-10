@@ -47,10 +47,10 @@ public class TransliteratorFactory {
 		scanner.addIncludeFilter(new AnnotationTypeFilter(AlphabetMapping.class));
 		
 		for (BeanDefinition beanDefinition : scanner.findCandidateComponents("com.ysoft.transliterator.implementation")) {
-			Class<ITransliterator> mapperClass = (Class<ITransliterator>) Class.forName(beanDefinition.getBeanClassName());
-			AlphabetMapping alphabetMapping = mapperClass.getAnnotation(AlphabetMapping.class);
+			Class<ITransliterator> transliteratorClass = (Class<ITransliterator>) Class.forName(beanDefinition.getBeanClassName());
+			AlphabetMapping alphabetMapping = transliteratorClass.getAnnotation(AlphabetMapping.class);
 			
-			ALPHABET_TRANSLITERATORS.put(new TransliteratorKey(alphabetMapping.from(), alphabetMapping.to()), mapperClass);
+			ALPHABET_TRANSLITERATORS.put(new TransliteratorKey(alphabetMapping.from(), alphabetMapping.to()), transliteratorClass);
 		}
 	}
 }
