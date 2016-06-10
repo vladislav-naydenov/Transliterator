@@ -51,11 +51,21 @@ public abstract class AbstractTransliterator implements ITransliterator {
 	}
 	
 	@Override
-	public abstract void createMappings();
-	
-	@Override
-	public abstract String transliterate(@NotNull String input);
+	public String transliterate(@NotNull String input) {
+		return this.doTransliterate(input, this.sourceToDestinationAlphabetMap);
+	}
 
 	@Override
-	public abstract String transliterateReverse(@NotNull String input);
+	public String transliterateReverse(@NotNull String input) {
+		return this.doTransliterate(input, this.destinationToSourceAlphabetMap);
+	}
+	
+	@Override
+	public void createMappings() {
+		this.createSourceToDestinationMapping();
+		this.createDestinationToSourceMapping();
+	}
+	
+	protected abstract void createSourceToDestinationMapping();
+	protected abstract void createDestinationToSourceMapping();
 }

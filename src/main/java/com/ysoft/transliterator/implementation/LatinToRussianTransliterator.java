@@ -10,8 +10,8 @@ import com.ysoft.transliterator.enumeration.EAlphabet;
  * @author Vladislav Naydenov
  *
  */
-@AlphabetMapping(from = EAlphabet.LATIN, to = EAlphabet.CYRILLIC)
-public class LatinToCyrillicTransliterator extends AbstractTransliterator {
+@AlphabetMapping(from = EAlphabet.LATIN, to = EAlphabet.RUSSIAN)
+public class LatinToRussianTransliterator extends AbstractTransliterator {
 
 	@Override
 	protected void createSourceToDestinationMapping() {
@@ -24,7 +24,7 @@ public class LatinToCyrillicTransliterator extends AbstractTransliterator {
 		this.sourceToDestinationAlphabetMap.put('g', "ã");
 		this.sourceToDestinationAlphabetMap.put('h', "õ");
 		this.sourceToDestinationAlphabetMap.put('i', "è");
-		this.sourceToDestinationAlphabetMap.put('j', "j");
+		this.sourceToDestinationAlphabetMap.put('j', "é");
 		this.sourceToDestinationAlphabetMap.put('k', "ê");
 		this.sourceToDestinationAlphabetMap.put('l', "ë");
 		this.sourceToDestinationAlphabetMap.put('m', "ì");
@@ -39,7 +39,7 @@ public class LatinToCyrillicTransliterator extends AbstractTransliterator {
 		this.sourceToDestinationAlphabetMap.put('v', "â");
 		this.sourceToDestinationAlphabetMap.put('w', "â");
 		this.sourceToDestinationAlphabetMap.put('x', "õ");
-		this.sourceToDestinationAlphabetMap.put('y', "ü");
+		this.sourceToDestinationAlphabetMap.put('y', "û");
 		this.sourceToDestinationAlphabetMap.put('z', "ç");
 	}
 	
@@ -51,6 +51,7 @@ public class LatinToCyrillicTransliterator extends AbstractTransliterator {
 		this.destinationToSourceAlphabetMap.put('ã', "g");
 		this.destinationToSourceAlphabetMap.put('ä', "d");
 		this.destinationToSourceAlphabetMap.put('å', "e");
+		this.destinationToSourceAlphabetMap.put('¸', "jo");
 		this.destinationToSourceAlphabetMap.put('æ', "zh");
 		this.destinationToSourceAlphabetMap.put('ç', "z");
 		this.destinationToSourceAlphabetMap.put('è', "i");
@@ -67,13 +68,15 @@ public class LatinToCyrillicTransliterator extends AbstractTransliterator {
 		this.destinationToSourceAlphabetMap.put('ó', "u");
 		this.destinationToSourceAlphabetMap.put('ô', "f");
 		this.destinationToSourceAlphabetMap.put('õ', "h");
-		this.destinationToSourceAlphabetMap.put('ö', "ts");
+		this.destinationToSourceAlphabetMap.put('ö', "c");
 		this.destinationToSourceAlphabetMap.put('÷', "ch");
 		this.destinationToSourceAlphabetMap.put('ø', "sh");
-		this.destinationToSourceAlphabetMap.put('ù', "sht");
-		this.destinationToSourceAlphabetMap.put('ú', "a");
-		this.destinationToSourceAlphabetMap.put('ü', "y");
-		this.destinationToSourceAlphabetMap.put('þ', "yu");
-		this.destinationToSourceAlphabetMap.put('ÿ', "ya");
+		this.destinationToSourceAlphabetMap.put('ù', "shh");
+		this.destinationToSourceAlphabetMap.put('ú', "''");
+		this.destinationToSourceAlphabetMap.put('û', "y");
+		this.destinationToSourceAlphabetMap.put('ü', "'");
+		this.destinationToSourceAlphabetMap.put('ý', "je");
+		this.destinationToSourceAlphabetMap.put('þ', "ju");
+		this.destinationToSourceAlphabetMap.put('ÿ', "ja");
 	}
 }
