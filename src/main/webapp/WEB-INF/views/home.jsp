@@ -20,11 +20,16 @@
 				<strong>Error!</strong> ${error}
 			</div>
 		</c:if>
+		<c:if test="${not empty info}">
+			<div class="alert alert-info" role="alert">
+				${info}
+			</div>
+		</c:if>
 	
 		<form:form method="POST" commandName="transliteratorModel" action="/transliterator/">
 			<div class="form-group">
-				<form:label path="primaryAlphabet">Source alphabet</form:label>
-				<form:input path="primaryAlphabet" readonly="true"/>
+				<form:label path="sourceAlphabet">Source alphabet</form:label>
+				<form:input path="sourceAlphabet" readonly="true"/>
 			</div>
 			
 			<div class="form-group">
@@ -32,14 +37,17 @@
 				<form:select path="targetAlphabet" items="${targetAlphabets}"/>
 			</div>
 			
-			<div class="form-group">
-				<form:textarea path="input" cols="60" rows="20"/>
-				<form:textarea path="result" cols="60" rows="20"/>
-			</div>
+			<fieldset class="form-group">
+				<form:label path="sourceAlphabetString">Source</form:label>
+				<form:textarea path="sourceAlphabetString" cssClass="form-control" cols="60" rows="20"/>
+				
+				<form:label path="targetAlphabetString">Target</form:label>
+				<form:textarea path="targetAlphabetString" cssClass="form-control" cols="60" rows="20"/>
+			</fieldset>
 			
 			<div class="btn-group" role="group">
-				<button type="submit" class="btn btn-primary">Transliterate</button>
-				<button type="submit" class="btn btn-primary">Transliterate reverse</button>
+				<input type="submit" name="transliterate" value="Transliterate" class="btn btn-primary"/>
+				<input type="submit" name="transliterateReverse" value="Transliterate reverse" class="btn btn-primary"/>
 			</div>
 		</form:form>
 	</div>

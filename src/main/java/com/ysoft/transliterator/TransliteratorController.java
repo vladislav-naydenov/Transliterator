@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.common.base.Strings;
 import com.ysoft.transliterator.contract.ITransliterator;
 import com.ysoft.transliterator.enumeration.EAlphabet;
 import com.ysoft.transliterator.exception.NonExistentTransliteratorException;
@@ -33,36 +34,62 @@ public class TransliteratorController {
 		TransliteratorModel transliteratorModel = new TransliteratorModel();
 		model.addAttribute("transliteratorModel", transliteratorModel);
 		model.addAttribute("targetAlphabets", transliteratorModel.getTargetAlphabets());
-		model.addAttribute("input", transliteratorModel.getInput());
-		model.addAttribute("result", transliteratorModel.getResult());
+		model.addAttribute("sourceAlphabetString", transliteratorModel.getSourceAlphabetString());
+		model.addAttribute("targetAlphabetString", transliteratorModel.getTargetAlphabetString());
 		
 		return "home";
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST, params = "transliterate")
 	public String transliterate(@ModelAttribute("transliteratorModel") TransliteratorModel transliteratorModel, ModelMap model) {
+		if (Strings.isNullOrEmpty(transliteratorModel.getSourceAlphabetString())) {
+			model.addAttribute("info", "No text for transliteration in source alphabet box.");
+			return "home";
+		}
+		return transliterate(transliteratorModel, model, false);
+	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.POST, params = "transliterateReverse")
+	public String transliterateReverse(@ModelAttribute("transliteratorModel") TransliteratorModel transliteratorModel, ModelMap model) {
+		if (Strings.isNullOrEmpty(transliteratorModel.getTargetAlphabetString())) {
+			model.addAttribute("info", "No text for transliteration in target alphabet box.");
+			return "home";
+		}
+		return transliterate(transliteratorModel, model, true);
+	}
+	
+	private String transliterate(TransliteratorModel transliteratorModel, ModelMap model, boolean reverse) {
 		model.addAttribute("transliteratorModel", transliteratorModel);
 		model.addAttribute("targetAlphabets", transliteratorModel.getTargetAlphabets());
-		model.addAttribute("input", transliteratorModel.getInput());
+		model.addAttribute("sourceAlphabetString", transliteratorModel.getSourceAlphabetString());
 		try {
-			transliteratorModel.setResult(doTransliterate(transliteratorModel));
+			if (reverse) {
+				transliteratorModel.setSourceAlphabetString(doTransliterate(transliteratorModel, reverse));
+			} else {
+				transliteratorModel.setTargetAlphabetString(doTransliterate(transliteratorModel, reverse));
+			}
 		} catch (NonExistentTransliteratorException e) {
-			model.addAttribute("error", String.format("Transliteration from %s to %s is not yet implemented.", transliteratorModel.getPrimaryAlphabet(), transliteratorModel.getTargetAlphabet()));
+			model.addAttribute("error", String.format("Transliteration from %s to %s is not yet implemented.", transliteratorModel.getSourceAlphabet(), transliteratorModel.getTargetAlphabet()));
 		}
-		model.addAttribute("result", transliteratorModel.getResult());
+		model.addAttribute("targetAlphabetString", transliteratorModel.getTargetAlphabetString());
 		
 		return "home";
 	}
 	
-	private String doTransliterate(TransliteratorModel transliteratorModel) throws NonExistentTransliteratorException {
+	private String doTransliterate(TransliteratorModel transliteratorModel, boolean reverse) throws NonExistentTransliteratorException {
 		ITransliterator transliterator = null;
 		try {
-			transliterator = TransliteratorFactory.produce(EAlphabet.of(transliteratorModel.getPrimaryAlphabet()), EAlphabet.of(transliteratorModel.getTargetAlphabet()));
+			transliterator = TransliteratorFactory.produce(EAlphabet.of(transliteratorModel.getSourceAlphabet()), EAlphabet.of(transliteratorModel.getTargetAlphabet()));
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new RuntimeException("Failed to create transliterator", e);
 		}
 		
-		String transliteratedText = transliterator.transliterate(transliteratorModel.getInput());
+		String transliteratedText = null;
+		if (reverse) {
+			transliteratedText = transliterator.transliterateReverse(transliteratorModel.getTargetAlphabetString());
+		} else {
+			transliteratedText = transliterator.transliterate(transliteratorModel.getSourceAlphabetString());
+		}
 		
 		return transliteratedText;
 	}

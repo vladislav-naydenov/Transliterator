@@ -8,28 +8,39 @@ import com.ysoft.transliterator.enumeration.EAlphabet;
 
 public class TransliteratorModel {
 
-	private String primaryAlphabet;
 	private List<String> targetAlphabets;
 	private String sourceAlphabet;
 	private String targetAlphabet;
-	private String input;
-	private String result;
+	private String sourceAlphabetString;
+	private String targetAlphabetString;
 	
 	public TransliteratorModel() {
 		this("Latin", getTargetAlphabetNames());
 	}
 	
-	public TransliteratorModel(String primaryAlphabet, List<String> targetAlphabets) {
-		this.primaryAlphabet = primaryAlphabet;
+	public TransliteratorModel(String sourceAlphabet, List<String> targetAlphabets) {
+		this.sourceAlphabet = sourceAlphabet;
 		this.targetAlphabets = targetAlphabets;
-	}
-	
-	public String getPrimaryAlphabet() {
-		return primaryAlphabet;
 	}
 
 	public List<String> getTargetAlphabets() {
 		return targetAlphabets;
+	}
+
+	public String getSourceAlphabetString() {
+		return sourceAlphabetString;
+	}
+
+	public void setSourceAlphabetString(String sourceAlphabetString) {
+		this.sourceAlphabetString = sourceAlphabetString;
+	}
+
+	public String getTargetAlphabetString() {
+		return targetAlphabetString;
+	}
+
+	public void setTargetAlphabetString(String targetAlphabetString) {
+		this.targetAlphabetString = targetAlphabetString;
 	}
 
 	public String getSourceAlphabet() {
@@ -46,22 +57,6 @@ public class TransliteratorModel {
 
 	public void setTargetAlphabet(String targetAlphabet) {
 		this.targetAlphabet = targetAlphabet;
-	}
-
-	public String getInput() {
-		return input;
-	}
-
-	public void setInput(String input) {
-		this.input = input;
-	}
-
-	public String getResult() {
-		return result;
-	}
-
-	public void setResult(String result) {
-		this.result = result;
 	}
 
 	private static List<String> getTargetAlphabetNames() {
