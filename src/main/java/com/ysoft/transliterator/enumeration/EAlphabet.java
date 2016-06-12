@@ -6,8 +6,8 @@ package com.ysoft.transliterator.enumeration;
 import com.google.common.base.Strings;
 
 /**
+ * Enumeration containing all supported alphabets. 
  * @author Vladislav Naydenov
- *
  */
 public enum EAlphabet {
 

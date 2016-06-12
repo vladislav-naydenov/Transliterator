@@ -16,8 +16,8 @@ import com.ysoft.transliterator.enumeration.EAlphabet;
 import com.ysoft.transliterator.exception.NonExistentTransliteratorException;
 
 /**
+ * Factory that can create instances of {@link ITransliterator}
  * @author Vladislav Naydenov
- *
  */
 public class TransliteratorFactory {
 
@@ -27,10 +27,21 @@ public class TransliteratorFactory {
 		try {
 			scan();
 		} catch (ClassNotFoundException e) {
+			// this should never happen
 			throw new RuntimeException(e);
 		}
 	}
 	
+	/**
+	 * Produces an instance of {@link ITransliterator} for the given alphabets
+	 * @param fromAlphabet - the source alphabet
+	 * @param toAlphabet - the destination alphabet
+	 * @return an instance of {@link ITransliterator} which knows how to transliterate text in source alphabet to destination alphabet
+	 * and backwards.
+	 * @throws NonExistentTransliteratorException - if does not exists such implementation of {@link ITransliterator}
+	 * @throws InstantiationException 
+	 * @throws IllegalAccessException
+	 * */
 	public static ITransliterator produce(EAlphabet fromAlphabet, EAlphabet toAlphabet) throws InstantiationException, IllegalAccessException, NonExistentTransliteratorException {
 		Class<ITransliterator> transliteratorClass = ALPHABET_TRANSLITERATORS.get(new TransliteratorKey(fromAlphabet, toAlphabet));
 		
@@ -41,6 +52,11 @@ public class TransliteratorFactory {
 		return transliteratorClass.newInstance();
 	}
 	
+	/**
+	 * Scans the 'com.ysoft.transliterator.implementation' package and searches for a classes annotated with
+	 * {@link AlphabetMapping} annotation and stores the {@link Class}{@literal <}{@link ITransliterator}{@literal >}
+	 * instances in a map mapped with proper {@link TransliteratorKey}
+	 * */
 	@SuppressWarnings("unchecked")
 	private static void scan() throws ClassNotFoundException {
 		ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(false);

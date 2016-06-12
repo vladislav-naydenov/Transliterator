@@ -7,8 +7,8 @@ import com.ysoft.transliterator.annotation.AlphabetMapping;
 import com.ysoft.transliterator.enumeration.EAlphabet;
 
 /**
+ * Implements transliteration from Latin to Cyrillic alphabet and reverse.
  * @author Vladislav Naydenov
- *
  */
 @AlphabetMapping(from = EAlphabet.LATIN, to = EAlphabet.CYRILLIC)
 public class LatinToCyrillicTransliterator extends AbstractTransliterator {

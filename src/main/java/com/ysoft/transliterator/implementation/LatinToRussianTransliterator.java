@@ -7,8 +7,8 @@ import com.ysoft.transliterator.annotation.AlphabetMapping;
 import com.ysoft.transliterator.enumeration.EAlphabet;
 
 /**
+ * Implements transliteration from Latin to Russian alphabet
  * @author Vladislav Naydenov
- *
  */
 @AlphabetMapping(from = EAlphabet.LATIN, to = EAlphabet.RUSSIAN)
 public class LatinToRussianTransliterator extends AbstractTransliterator {

@@ -3,17 +3,21 @@
  */
 package com.ysoft.transliterator.factory;
 
+import com.ysoft.transliterator.contract.ITransliterator;
 import com.ysoft.transliterator.enumeration.EAlphabet;
 
 /**
+ * Represents a key by which an {@link ITransliterator} implementations will be searched 
  * @author Vladislav Naydenov
- *
  */
 public class TransliteratorKey {
 
 	private EAlphabet fromAlphabet;
 	private EAlphabet toAlphabet;
 	
+	/**
+	 * Creates an instance of this class initialized with the given alphabets
+	 * */
 	public TransliteratorKey(EAlphabet fromAlphabet, EAlphabet toAlphabet) {
 		this.fromAlphabet = fromAlphabet;
 		this.toAlphabet = toAlphabet;
