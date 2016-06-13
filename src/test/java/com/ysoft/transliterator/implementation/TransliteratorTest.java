@@ -98,4 +98,28 @@ public class TransliteratorTest {
 		
 		Assert.assertThat(actual, is(expected));
 	}
+	
+	@Test
+	public void testLatinToTurkishTransliterate() {
+		this.cut = new LatinToTurkishTransliterator();
+		String latinText = "The quick, brown fox jump over the lazy dog.";
+		String expected = "The quick, brown fox jump over the lazy dog.";
+		String actual = cut.transliterate(latinText);
+		
+		Assert.assertThat(actual, is(expected));
+	}
+	
+	@Test
+	public void testLatinToTurkishTransliterateReverse() {
+		this.cut = new LatinToTurkishTransliterator();
+		String turkishText = "Yukarda mavi gök, asağıda yağız yer yaratıldıkta; ikisinin arasında insan oğlu yaratılmış. "
+						   + "İnsan oğulları üzerine ecdadım Bumın hakan, İstemi hakan tahta oturmuş; oturarak Türk milletinin "
+						   + "ülkesini, türesini, idare edivermiş, tanzim edivermis.";
+		String expected = "Yukarda mavi gok, asagida yagiz yer yaratildikta; ikisinin arasinda insan oglu yaratilmis. "
+				   		+ "Insan ogullari uzerine ecdadim Bumin hakan, Istemi hakan tahta oturmus; oturarak Turk milletinin "
+				   		+ "ulkesini, turesini, idare edivermis, tanzim edivermis.";
+		String actual = cut.transliterateReverse(turkishText);
+		
+		Assert.assertThat(actual, is(expected));
+	}
 }
