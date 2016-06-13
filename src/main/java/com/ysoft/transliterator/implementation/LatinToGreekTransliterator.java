@@ -99,6 +99,8 @@ public class LatinToGreekTransliterator extends AbstractTransliterator {
 		this.destinationToSourceAlphabetMap.put('ρ', "r");
 		this.destinationToSourceAlphabetMap.put('Σ', "S");
 		this.destinationToSourceAlphabetMap.put('σ', "s");
+		// this is again sigma but in word final position
+		this.destinationToSourceAlphabetMap.put('ς', "s");
 		this.destinationToSourceAlphabetMap.put('T', "T");
 		this.destinationToSourceAlphabetMap.put('τ', "t");
 		this.destinationToSourceAlphabetMap.put('Y', "U");
