@@ -16,7 +16,8 @@ public enum EAlphabet {
 	RUSSIAN("Russian"),
 	CZECH("Czech"),
 	GREEK("Greek"),
-	TURKISH("Turkish");
+	TURKISH("Turkish"),
+	HEBREW("Hebrew");
 	
 	private String alphabetName;
 	

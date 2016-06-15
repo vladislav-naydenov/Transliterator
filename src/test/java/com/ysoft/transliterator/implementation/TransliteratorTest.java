@@ -122,4 +122,26 @@ public class TransliteratorTest {
 		
 		Assert.assertThat(actual, is(expected));
 	}
+	
+	@Test
+	public void testLatinToHebrewTransliterate() {
+		this.cut = new LatinToHebrewTransliterator();
+		String latinText = "The quick, brown fox jump over the lazy dog.";
+		String expected = "טהע קויצק, בראָצן פאָח טוםפ אָװער טהע לאזי דאָג.";
+		String actual = cut.transliterate(latinText);
+		
+		Assert.assertThat(actual, is(expected));
+	}
+	
+	@Test
+	public void testLatinToHebrewTransliterateReverse() {
+		this.cut = new LatinToHebrewTransliterator();
+		String hebrewText = "בה כלל התפתחות פסיכולוגיה, העמוד גיאוגרפיה זכר בה. תנך כדור שנורו תחבורה אם, שתפו התוכן ספרדית דת אחר. את היום סרבול ביוני צעד. כניסה תרבות צעד"
+						  + " או, של שאלות אווירונאוטיקה שכל. החול ליום כימיה ארץ מה, על כניסה הראשי קישורים כדי.";
+		String expected = "BH QLL HSPSXUS PSYQULUGYH, HEMUD GYAUGRPYH ZQR BH. SNQ QDUR CNURU SXBURH AM, CSPU HSUQN SPRDYS DS AXR. AS HYUM SRBUL BYUNY WED. QNYSH SRBUS WED AU, "
+						+ "CL CALUS AUUYRUNAUTYKH CQL. HXUL LYUM QYMYH ARW MH, EL QNYSH HRACY KYCURYM QDY.";
+		String actual = cut.transliterateReverse(hebrewText);
+		
+		Assert.assertThat(actual, is(expected));
+	}
 }
